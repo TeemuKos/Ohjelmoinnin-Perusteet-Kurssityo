@@ -4,7 +4,9 @@ from luokka import ruoka
 import os
 
 def LuoUusi():
-    luoNimi = input("Anna ruoannimi: ")
+    luoNimi = input("Anna ruoannimi, jätä tyhjäksi palataksesi: ")
+    if luoNimi == "":
+        return
     luoAine=""
     print("Kirjoita raaka-aineet rivi kerrallaan. Kirjoitettuasi rivin paina enter. \nKun haluat lopettaa raaka-aineiden kirjoittamisen, paina enter tyhjällä rivillä")
     while True:
@@ -21,7 +23,10 @@ def LuoUusi():
             break
         else:
             luoOhje += ',' + '\n' + uusiRiviOhje
-    return ruokaKirja.append(ruoka(luoNimi,luoAine,luoOhje))
+    ruokaKirja.append(ruoka(luoNimi,luoAine,luoOhje))
+    print("Uusi resepti ",ruokaKirja[-1].nimi, " tallennettu reseptikirjaan")
+    TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
+    input("Paina enter jatkaaksesi")
 def TalletaLista(talletaTiedosto,lista):
     avattuTiedosto = open(talletaTiedosto, "wb")
     pickle.dump(lista, avattuTiedosto)
@@ -64,30 +69,44 @@ while True:
         print("Luodaan uusi resepti")
         print()
         LuoUusi()
-        print()
-        print("Uusi resepti ",ruokaKirja[-1].nimi, " tallennettu reseptikirjaan")
-        TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
-        input("Paina enter jatkaaksesi")
     elif a == 2: #Poista resepti
         print('\n'*40)
         print("Minkä reseptin haluat poistaa?")
         for obj in ruokaKirja:
             i+=1
             print(i,"-", obj.nimi)
-        etsi = int(input("Valitse reseptin numero minkä haluat poistaa "))
-        haettuResepti= etsi - 1
-        print()
-        print("Olet poistamassa reseptiä: ", ruokaKirja[haettuResepti].nimi)
-        print("Oletko aivan varma (k) tai (e)")
-        poistoVarmistus = input()
-        if poistoVarmistus == "k":
-            print("Poistit reseptin: ",ruokaKirja[haettuResepti].nimi, " reseptikirjasta")
-            del ruokaKirja[haettuResepti]
-            TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
-            input("Paina enter jatkaaksesi")
+        print("Kaikki")
+        print("Poistu")
+        etsi = input("Valitse reseptin numero tai toiminto ")
+        if etsi.isnumeric() == True:
+            haettuResepti= int(etsi) - 1
+            print()
+            print("Olet poistamassa reseptiä: ", ruokaKirja[haettuResepti].nimi)
+            print("Oletko aivan varma (k) tai (e)")
+            poistoVarmistus = input()
+            if poistoVarmistus == "k":
+                print("Poistit reseptin: ",ruokaKirja[haettuResepti].nimi, " reseptikirjasta")
+                del ruokaKirja[haettuResepti]
+                TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
+                input("Paina enter jatkaaksesi")
+            else:
+                print("Et poistanut mitään")
+                input("Paina enter jatkaaksesi")
+        elif etsi == "kaikki" or etsi == "Kaikki":
+            print()
+            print("Olet poistamassa kaikki reseptit")
+            print("Oletko aivan varma (k) tai (e)")
+            poistoVarmistus = input()
+            if poistoVarmistus == "k":
+                print("Poistit kaikki reseptit reseptikirjasta")
+                ruokaKirja.clear()
+                TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
+                input("Paina enter jatkaaksesi")
+            else:
+                print("Et poistanut mitään")
+                input("Paina enter jatkaaksesi")
         else:
-            print("Et poistanut mitään")
-            input("Paina enter jatkaaksesi")
+            continue
     elif a == 3: #Katso reseptiä
         print('\n'*40)
         if ruokaKirja:
@@ -147,7 +166,11 @@ while True:
             print("Reseptikirjassasi on ",len(ruokaKirja), " ruokaa")
             ruokienMaara= int(input("Montako ruokaa haluaisit listaasi? "))
             ruokaLista.clear()
-            if ruokienMaara <= len(ruokaKirja):
+            if ruokienMaara == 0:
+                print("Et lisännyt yhtään ruokaa ruokalistaasi!")
+                input("Paina enter jatkaaksesi")
+                break
+            elif ruokienMaara <= len(ruokaKirja):
                 for i in range(ruokienMaara):
                     arvottuRuoka = randrange(0,len(ruokaKirja))
                     arvotunRuuanobj = ruokaKirja[arvottuRuoka]
@@ -161,10 +184,6 @@ while True:
                 for obj in ruokaLista:
                     i+=1
                     print(i,"-", obj.nimi)
-                input("Paina enter jatkaaksesi")
-                break
-            elif ruokienMaara == 0:
-                print("Et lisännyt yhtään ruokaa ruokalistaasi!")
                 input("Paina enter jatkaaksesi")
                 break
             else:

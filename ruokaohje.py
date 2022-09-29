@@ -3,7 +3,7 @@ from random import randrange
 from luokka import ruoka
 import os
 
-def LuoUusi():
+def LuoUusi(lista ,listanTiedosto):
     print('\n'*40)
     print("Luodaan uusi resepti")
     print()
@@ -29,17 +29,17 @@ def LuoUusi():
         else:
             luoOhje += '\n' + uusiRiviOhje +','
     print('\n'*40)
-    ruokaKirja.append(ruoka(luoNimi,luoAine,luoOhje))
-    print("Uusi resepti ",ruokaKirja[-1].nimi, " tallennettu reseptikirjaan")
-    TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
+    lista.append(ruoka(luoNimi,luoAine,luoOhje))
+    print("Uusi resepti ",lista[-1].nimi, " tallennettu reseptikirjaan")
+    TalletaLista(listantiedosto, lista)
     input("Paina enter jatkaaksesi")
 
 
-def PoistaRuokalistasta():
+def PoistaRuokalistasta(lista, listanTiedosto):
     i = 0
     print('\n'*40)
     print("Minkä reseptin haluat poistaa?")
-    for obj in ruokaKirja:
+    for obj in lista:
         i+=1
         print(i,"-", obj.nimi)
     print("Kaikki")
@@ -48,13 +48,13 @@ def PoistaRuokalistasta():
     if etsi.isnumeric() == True:
         haettuResepti= int(etsi) - 1
         print()
-        print("Olet poistamassa reseptiä: ", ruokaKirja[haettuResepti].nimi)
+        print("Olet poistamassa reseptiä: ", lista[haettuResepti].nimi)
         print("Oletko aivan varma (k) tai (e)")
         poistoVarmistus = input()
         if poistoVarmistus == "k":
-            print("Poistit reseptin: ",ruokaKirja[haettuResepti].nimi, " reseptikirjasta")
-            del ruokaKirja[haettuResepti]
-            TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
+            print("Poistit reseptin: ",lista[haettuResepti].nimi, " reseptikirjasta")
+            del lista[haettuResepti]
+            TalletaLista(listanTiedosto, lista)
             input("Paina enter jatkaaksesi")
         else:
             print("Et poistanut mitään")
@@ -67,7 +67,7 @@ def PoistaRuokalistasta():
         if poistoVarmistus == "k":
             print("Poistit kaikki reseptit reseptikirjasta")
             ruokaKirja.clear()
-            TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
+            TalletaLista(listanTiedosto, lista)
             input("Paina enter jatkaaksesi")
         else:
             print("Et poistanut mitään")
@@ -76,22 +76,22 @@ def PoistaRuokalistasta():
         return
 
 
-def KatsoReseptiä():
+def KatsoReseptiä(lista):
     print('\n'*40)
-    if ruokaKirja:
+    if lista:
         print("Kaikki reseptisi")
         i=0
-        for obj in ruokaKirja:
+        for obj in lista:
             i+=1
             print(i,"-", obj.nimi)
         etsi = int(input("Valitse reseptin numero mitä katsella "))
         haettuResepti= etsi - 1
         print('\n'*40)
-        print("Ruoan nimi: ",ruokaKirja[haettuResepti].nimi)
+        print("Ruoan nimi: ",lista[haettuResepti].nimi)
         print()
-        print("Tarvittavat raaka-aineet",ruokaKirja[haettuResepti].raakaAineet)
+        print("Tarvittavat raaka-aineet",lista[haettuResepti].raakaAineet)
         print()
-        print("Valmistusohje: ",ruokaKirja[haettuResepti].ohje)
+        print("Valmistusohje: ",lista[haettuResepti].ohje)
         print()
         print("Paina enter palataksesi, halutessasi muokata reseptiä, kirjoita muokkaa")
         katseleToiminto = input()
@@ -106,27 +106,78 @@ def KatsoReseptiä():
             muokkausValinta = (int(input("Valitse muokattavan asian numero: ")))
             if muokkausValinta == 1:
                 print('\n'*40)
-                print("Ruoan vanha nimi oli: ", ruokaKirja[haettuResepti].nimi)
+                print("Ruoan vanha nimi oli: ", lista[haettuResepti].nimi)
                 print()
-                ruokaKirja[haettuResepti].MuokkaaNimi(input("Mikä on reseptin uusi nimi? "))
-                print("Ruoan uusi nimi on: ", ruokaKirja[haettuResepti].nimi)
+                lista[haettuResepti].MuokkaaNimi(input("Mikä on reseptin uusi nimi? "))
+                print("Ruoan uusi nimi on: ", lista[haettuResepti].nimi)
                 input("Paina enter jatkaaksesi")
             elif muokkausValinta == 2:
                 print('\n'*40)
-                print("Ruoan vanhat raaka-aineet olivat: ", ruokaKirja[haettuResepti].raakaAineet)
+                print("Ruoan vanhat raaka-aineet olivat: ", lista[haettuResepti].raakaAineet)
                 print()
-                ruokaKirja[haettuResepti].MuokkaaAine(input("Mikä on reseptin uudet raaka-aineet? "))
-                print("Ruoan uudet raaka-aineet: ", ruokaKirja[haettuResepti].raakaAineet)
+                lista[haettuResepti].MuokkaaAine(input("Mikä on reseptin uudet raaka-aineet? "))
+                print("Ruoan uudet raaka-aineet: ", lista[haettuResepti].raakaAineet)
                 input("Paina enter jatkaaksesi")
             elif muokkausValinta == 3:
                 print('\n'*40)
-                print("Ruoan vanha valmistusohje oli: ", ruokaKirja[haettuResepti].ohje)
-                ruokaKirja[haettuResepti].MuokkaaOhje(input("Mikä on reseptin uusi ohje? "))
-                print("Ruoan uusi valmistusohje on: ", ruokaKirja[haettuResepti].ohje)
+                print("Ruoan vanha valmistusohje oli: ", lista[haettuResepti].ohje)
+                lista[haettuResepti].MuokkaaOhje(input("Mikä on reseptin uusi ohje? "))
+                print("Ruoan uusi valmistusohje on: ", lista[haettuResepti].ohje)
                 input("Paina enter jatkaaksesi")
     else:
         print("Reseptikirjassasi ei ole vielä yhtään reseptiä!")
         input("Paina enter jatkaaksesi")
+
+
+def LuoRuokalista(listasta, luotavaLista, luotavaListaTiedosto):
+    print('\n'*40)
+    print("Luodaan uusi ruokalista!")
+    print()
+    while True:
+        print("Reseptikirjassasi on ",len(listasta), " ruokaa")
+        ruokienMaara= int(input("Montako ruokaa haluaisit listaasi? "))
+        luotavaLista.clear()
+        if ruokienMaara == 0:
+            print("Et lisännyt yhtään ruokaa ruokalistaasi!")
+            input("Paina enter jatkaaksesi")
+            break
+        elif ruokienMaara <= len(listasta):
+            for i in range(ruokienMaara):
+                arvottuRuoka = randrange(0,len(listasta))
+                arvotunRuuanobj = listasta[arvottuRuoka]
+                while arvotunRuuanobj in ruokaLista:
+                    arvottuRuoka = randrange(0,len(listasta))
+                    arvotunRuuanobj = listasta[arvottuRuoka]
+                luotavaLista.append(listasta[arvottuRuoka])
+            TalletaLista(luotavaListaTiedosto,luotavaLista)
+            print("Uusi ruokalistasi: ")
+            i=0
+            for obj in luotavaLista:
+                i+=1
+                print(i,"-", obj.nimi)
+            input("Paina enter jatkaaksesi")
+            break
+        else:
+            print("Reseptikirjassasi ei ole riittävän monta ruokaa!")
+            input("Paina enter jatkaaksesi")
+            continue
+
+
+def ViimeisinRuokalista(lista):
+    print('\n'*40)
+    if lista:
+        i=0
+        print("Viimeisin ruokalistasi")
+        for obj in lista:
+            i+=1
+            print(i,"-", obj.nimi)
+        print()
+        input("Paina enter jatkaaksesi")
+    else:
+        print("Ruokalistaa ei ole tehty!")
+        print()
+        input("Paina enter jatkaaksesi")
+
 
 def TalletaLista(talletaTiedosto,lista):
     avattuTiedosto = open(talletaTiedosto, "wb")
@@ -142,17 +193,18 @@ def LataaLista(lataaTiedosto):
 
 #PÄÄKOODI
 
+#Haetaan reseptikirjan ja ruokalistan tiedostot muistiin
 ruokaKirjaTiedosto = os.path.join(os.path.dirname(__file__), "kirjatiedosto.pkl")
 ruokaListaTiedosto = os.path.join(os.path.dirname(__file__), "listatiedosto.pkl")
 
 ruokaKirja= []
 ruokaLista= []
-i=0
 
+#Määritetään reseptikirja ja ruokalista listat tiedostojensa arvoihin
 ruokaKirja = LataaLista(ruokaKirjaTiedosto)
 ruokaLista = LataaLista(ruokaListaTiedosto)
 
-
+#Käyttöliittymän pohja
 while True:
     print('\n'*40)
     print("Reseptikirjasi")
@@ -168,57 +220,15 @@ while True:
     a = int(input("Valitse vaihtoehto numerolla: "))
 
     if a == 1: 
-        LuoUusi()
+        LuoUusi(ruokaKirja,ruokaKirjaTiedosto)
     elif a == 2: #Poista resepti
-        PoistaRuokalistasta()
+        PoistaRuokalistasta(ruokaKirja, ruokaKirjaTiedosto)
     elif a == 3: #Katso reseptiä
-        KatsoReseptiä()
+        KatsoReseptiä(ruokaKirja)
     elif a == 4: #Luo ruokalista
-        print('\n'*40)
-        print("Luodaan uusi ruokalista!")
-        print()
-        while True:
-            print("Reseptikirjassasi on ",len(ruokaKirja), " ruokaa")
-            ruokienMaara= int(input("Montako ruokaa haluaisit listaasi? "))
-            ruokaLista.clear()
-            if ruokienMaara == 0:
-                print("Et lisännyt yhtään ruokaa ruokalistaasi!")
-                input("Paina enter jatkaaksesi")
-                break
-            elif ruokienMaara <= len(ruokaKirja):
-                for i in range(ruokienMaara):
-                    arvottuRuoka = randrange(0,len(ruokaKirja))
-                    arvotunRuuanobj = ruokaKirja[arvottuRuoka]
-                    while arvotunRuuanobj in ruokaLista:
-                        arvottuRuoka = randrange(0,len(ruokaKirja))
-                        arvotunRuuanobj = ruokaKirja[arvottuRuoka]
-                    ruokaLista.append(ruokaKirja[arvottuRuoka])
-                TalletaLista(ruokaListaTiedosto,ruokaLista)
-                print("Uusi ruokalistasi: ")
-                i=0
-                for obj in ruokaLista:
-                    i+=1
-                    print(i,"-", obj.nimi)
-                input("Paina enter jatkaaksesi")
-                break
-            else:
-                print("Reseptikirjassasi ei ole riittävän monta ruokaa!")
-                input("Paina enter jatkaaksesi")
-                continue
+        LuoRuokalista(ruokaKirja,ruokaLista,ruokaListaTiedosto)
     elif a == 5: #Viimeisin ruokalista
-        print('\n'*40)
-        if ruokaLista:
-            i=0
-            print("Viimeisin ruokalistasi")
-            for obj in ruokaLista:
-                i+=1
-                print(i,"-", obj.nimi)
-            print()
-            input("Paina enter jatkaaksesi")
-        else:
-            print("Ruokalistaa ei ole tehty!")
-            print()
-            input("Paina enter jatkaaksesi")
+        ViimeisinRuokalista(ruokaLista)
     elif a == 6:
         break
     

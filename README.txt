@@ -7,3 +7,6 @@ Ohjelman tarkoituksena on toimia sähköisenä reseptikirjana, jolla on seuraava
 -Katsella viimeistä ruokalistaa
 -Tallentaa lista tiedostoon .pkl
 -Lataa listan tiedostosta .pkl
+
+
+Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloittamaan uusi repo ja pushattu koko roska yhtenä kappaleena. Pyritään korjailemaan tästä eteenpäin osissa.

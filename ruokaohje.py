@@ -31,7 +31,7 @@ def LuoUusi(lista ,listanTiedosto):
     print('\n'*40)
     lista.append(ruoka(luoNimi,luoAine,luoOhje))
     print("Uusi resepti ",lista[-1].nimi, " tallennettu reseptikirjaan")
-    TalletaLista(listantiedosto, lista)
+    TalletaLista(listanTiedosto, lista)
     input("Paina enter jatkaaksesi")
 
 

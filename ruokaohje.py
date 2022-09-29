@@ -1,6 +1,5 @@
 import pickle
 from random import randrange
-from traceback import print_tb
 from luokka import ruoka
 import os
 
@@ -150,11 +149,13 @@ while True:
             ruokaLista.clear()
             if ruokienMaara <= len(ruokaKirja):
                 for i in range(ruokienMaara):
-                    arvottuRuoka = randrange(0,len(ruokaKirja))             #
-                    while arvottuRuoka in ruokaLista:                       # KORJAA TARKASTAMAAN ETTEI RUOKAA OLE JO LISTASSA
-                        arvottuRuoka = randrange(0,len(ruokaKirja))         #
-                    ruokaLista.append(ruokaKirja[arvottuRuoka])             #
-                    TalletaLista(ruokaListaTiedosto,ruokaLista)
+                    arvottuRuoka = randrange(0,len(ruokaKirja))
+                    arvotunRuuanobj = ruokaKirja[arvottuRuoka]
+                    while arvotunRuuanobj in ruokaLista:
+                        arvottuRuoka = randrange(0,len(ruokaKirja))
+                        arvotunRuuanobj = ruokaKirja[arvottuRuoka]
+                    ruokaLista.append(ruokaKirja[arvottuRuoka])
+                TalletaLista(ruokaListaTiedosto,ruokaLista)
                 print("Uusi ruokalistasi: ")
                 i=0
                 for obj in ruokaLista:

@@ -23,16 +23,33 @@ def LuoUusi():
         else:
             luoOhje += ',' + '\n' + uusiRiviOhje
     return ruokaKirja.append(ruoka(luoNimi,luoAine,luoOhje))
+def TalletaLista(talletaTiedosto,lista):
+    avattuTiedosto = open(talletaTiedosto, "wb")
+    pickle.dump(lista, avattuTiedosto)
+    avattuTiedosto.close()
+def LataaLista(lataaTiedosto):
+    avattuTiedosto = open(lataaTiedosto, "rb")
+    ladattuRuokaKirja = pickle.load(avattuTiedosto)
+    avattuTiedosto.close()
+    return ladattuRuokaKirja
 
-tiedosto = "listatiedosto.pkl"
-tiedostoSijainti = os.path.join(os.path.dirname(__file__), tiedosto)
+
+
+ruokaKirjaTiedosto = os.path.join(os.path.dirname(__file__), "kirjatiedosto.pkl")
+ruokaListaTiedosto = os.path.join(os.path.dirname(__file__), "listatiedosto.pkl")
+
 ruokaKirja= []
 ruokaLista= []
 i=0
 
-print("Reseptikirjasi")
+ruokaKirja = LataaLista(ruokaKirjaTiedosto)
+ruokaLista = LataaLista(ruokaListaTiedosto)
+
+
 while True:
     print('\n'*40)
+    print("Reseptikirjasi")
+    print()
     print("Valitse toiminto")
     print()
     print("1- Lisää resepti kirjaan")
@@ -41,8 +58,6 @@ while True:
     print("4- Luo viikon ruokalista")
     print("5- Katso viimeisintä ruokalistaa")
     print("6- Lopeta")
-    print("7- Tallenna lista")
-    print("8- Lue vanha lista")
     a = int(input("Valitse vaihtoehto numerolla: "))
 
     if a == 1: #Luo resepti
@@ -51,7 +66,8 @@ while True:
         print()
         LuoUusi()
         print()
-        print("Loit uuden reseptin nimellä: ",ruokaKirja[-1].nimi)
+        print("Uusi resepti ",ruokaKirja[-1].nimi, " tallennettu reseptikirjaan")
+        TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
         input("Paina enter jatkaaksesi")
     elif a == 2: #Poista resepti
         print('\n'*40)
@@ -66,8 +82,9 @@ while True:
         print("Oletko aivan varma (k) tai (e)")
         poistoVarmistus = input()
         if poistoVarmistus == "k":
-            print("Poistit reseptin: ",ruokaKirja[haettuResepti].nimi)
+            print("Poistit reseptin: ",ruokaKirja[haettuResepti].nimi, " reseptikirjasta")
             del ruokaKirja[haettuResepti]
+            TalletaLista(ruokaKirjaTiedosto, ruokaKirja)
             input("Paina enter jatkaaksesi")
         else:
             print("Et poistanut mitään")
@@ -76,6 +93,7 @@ while True:
         print('\n'*40)
         if ruokaKirja:
             print("Kaikki reseptisi")
+            i=0
             for obj in ruokaKirja:
                 i+=1
                 print(i,"-", obj.nimi)
@@ -119,7 +137,6 @@ while True:
                     ruokaKirja[haettuResepti].MuokkaaOhje(input("Mikä on reseptin uusi ohje? "))
                     print("Ruoan uusi valmistusohje on: ", ruokaKirja[haettuResepti].ohje)
                     input("Paina enter jatkaaksesi")
-            i=0
         else:
             print("Reseptikirjassasi ei ole vielä yhtään reseptiä!")
             input("Paina enter jatkaaksesi")
@@ -137,6 +154,7 @@ while True:
                     while arvottuRuoka in ruokaLista:                       # KORJAA TARKASTAMAAN ETTEI RUOKAA OLE JO LISTASSA
                         arvottuRuoka = randrange(0,len(ruokaKirja))         #
                     ruokaLista.append(ruokaKirja[arvottuRuoka])             #
+                    TalletaLista(ruokaListaTiedosto,ruokaLista)
                 print("Uusi ruokalistasi: ")
                 i=0
                 for obj in ruokaLista:
@@ -168,13 +186,4 @@ while True:
             input("Paina enter jatkaaksesi")
     elif a == 6:
         break
-    elif a == 7:
-        #PICKLE
-        open_file = open(tiedostoSijainti, "wb")
-        pickle.dump(ruokaKirja, open_file)
-        open_file.close()
-    elif a == 8:
-        open_file = open(tiedostoSijainti, "rb")
-        ruokaKirja = pickle.load(open_file)
-        open_file.close()
     

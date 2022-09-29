@@ -1,6 +1,6 @@
 class ruoka:
     def __init__(self,nimi,raakaAineet,ohje):
-        self.nimi=nimi
+        self.nimi=nimi.capitalize()
         self.raakaAineet=raakaAineet
         self.ohje=ohje
     def MuokkaaNimi(self, muokattuNimi):

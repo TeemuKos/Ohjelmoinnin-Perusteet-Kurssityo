@@ -10,3 +10,11 @@ Ohjelman tarkoituksena on toimia sähköisenä reseptikirjana, jolla on seuraava
 
 
 Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloittamaan uusi repo ja pushattu koko roska yhtenä kappaleena. Pyritään korjailemaan tästä eteenpäin osissa.
+
+Toimintoehdotukset:
+- Varmista, että monirivi() vaatii ainakin yhden rivin parametrikseen
+- Luo ominaisuus tulostaa resepti, minkä jälkeen palataan takaisin listaan
+- Siirrä poistotoiminnot ReseptiKirjan metodeiksi
+
+Bugit:
+- Kaikkien poistaminen kaataa softan!!!!!!

@@ -9,7 +9,7 @@ Ohjelman tarkoituksena on toimia sähköisenä reseptikirjana, jolla on seuraava
 -Lataa listan tiedostosta .pkl
 
 
-Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloittamaan uusi repo ja pushattu koko roska yhtenä kappaleena. Pyritään korjailemaan tästä eteenpäin osissa.
+Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloittamaan uusi repo ja pushattu koko roska yhtenä kappaleena. Pyritään korjailemaan tästä eteenpäin osissa. Repo korruptoitunut oman pilven backupista. Siirretty projekti pois synkronoitavista tiedostoista
 
 Toimintoehdotukset:
 - Varmista, että monirivi() vaatii ainakin yhden rivin parametrikseen

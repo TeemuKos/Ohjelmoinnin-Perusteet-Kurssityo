@@ -14,7 +14,6 @@ Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloitta
 Toimintoehdotukset:
 - Varmista, että monirivi() vaatii ainakin yhden rivin parametrikseen
 - Luo ominaisuus tulostaa resepti, minkä jälkeen palataan takaisin listaan
-- Siirrä poistotoiminnot ReseptiKirjan metodeiksi
+
 
 Bugit:
-- Kaikkien poistaminen kaataa softan!!!!!!

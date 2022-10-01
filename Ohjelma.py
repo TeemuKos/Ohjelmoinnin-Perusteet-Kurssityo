@@ -1,7 +1,4 @@
-import pickle
-from random import randrange
-from luokka import ruoka,ReseptiKirja
-import os
+from luokka import ReseptiKirja
 
 def ValmisteleSivu(valinta):
     print('\n'*40)
@@ -32,42 +29,6 @@ def MoniRivi():                                                                 
     print('\n'*40)
     return sana
 
-def PoistaToiminto(valinta,lista):
-    print('\n'*40)
-    if valinta.isnumeric():
-        listaIndeksi = int(valinta) - 1
-        print()
-        print("Olet poistamassa reseptiä: ", lista[listaIndeksi].nimi)
-
-    elif valinta.lower() == "kaikki":
-        print()
-        print("Olet poistamassa kaikki reseptit")
-    return listaIndeksi
-                                                                                                    #TÄÄLLÄ VIRHE!!!!
-def PoistaVarmistus(lista, indeksi, valinta,poistoVarmistus):                                       #EI POISTA KAIKKIA!!!!
-    print('\n'*40)
-    if poistoVarmistus == "k" and valinta.isnumeric():
-        print("Poistit reseptin: ",lista[indeksi].nimi, " reseptikirjasta")
-        del lista[indeksi]
-    elif poistoVarmistus == "k" and valinta == "kaikki":
-        print("Poistit kaikki reseptit reseptikirjasta")
-        lista.clear()
-    else:
-        print("Et poistanut mitään")
-    Enter()
-
-def ViimeisinRuokalista(lista):
-    ValmisteleSivu(a)
-    if lista:
-        print("Viimeisin ruokalistasi")
-        TulostaNimi(lista)
-        print()
-        Enter()
-    else:
-        print("Ruokalistaa ei ole tehty!")
-        print()
-        Enter()
-
 def TulostaNimi(lista):
     i = 0
     for obj in lista:
@@ -75,12 +36,9 @@ def TulostaNimi(lista):
         print(i,"-", obj.nimi)
 
 #PÄÄKOODI
-
 #Määritetään reseptikirja ja ruokalista ReseptiKirja olioiksi, ja ladataan tiedostot
-reseptiKirja= ReseptiKirja("reseptikirja")
+reseptiKirja = ReseptiKirja("reseptikirja")
 ruokaLista = ReseptiKirja("ruokalista")
-
-#Käyttöliittymän pohja
 while True:
     print('\n'*40)
     print("Reseptikirjasi")
@@ -95,7 +53,6 @@ while True:
     print("6- Lopeta")
     print
     a = int(input("Valitse vaihtoehto numerolla: "))
-
     if a == 1: 
         ValmisteleSivu(a)
         luotunimi = input("Anna ruoannimi, jätä tyhjäksi palataksesi: ")
@@ -113,12 +70,12 @@ while True:
         ValmisteleSivu(a)
         TulostaNimi(reseptiKirja.lista)
         print("Kaikki")
-        etsiPoisto = input("Valitse reseptin numero tai toiminto, jätä tyhjäksi palataksesi ")
-        toiminto = PoistaToiminto(etsiPoisto, reseptiKirja.lista)
+        etsiPoisto = str(input("Valitse reseptin numero tai toiminto, jätä tyhjäksi palataksesi "))
+        toiminto = reseptiKirja.PoistaToiminto(etsiPoisto)
         varmistus = input("Oletko aivan varma (k) tai (e): ")
-        PoistaVarmistus(reseptiKirja.lista,toiminto,etsiPoisto,varmistus)
+        reseptiKirja.PoistaVarmistus(toiminto,etsiPoisto,varmistus)
         reseptiKirja.TalletaLista(reseptiKirja.tiedosto)
-
+        Enter()
     elif a == 3: #Katso reseptiä
         ValmisteleSivu(a)
         if reseptiKirja.lista:

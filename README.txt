@@ -3,10 +3,11 @@ Ohjelman tarkoituksena on toimia sähköisenä reseptikirjana, jolla on seuraava
 -Lisätä resepti
 -Poistaa resepti
 -Lukea reseptejä
+-Muokata reseptejä
 -Tehdä ruokalista
 -Katsella viimeistä ruokalistaa
--Tallentaa lista tiedostoon .pkl
--Lataa listan tiedostosta .pkl
+-Tallentaa listat tiedostoihin .pkl
+-Lataa listat tiedostoista .pkl
 
 
 Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloittamaan uusi repo ja pushattu koko roska yhtenä kappaleena. Pyritään korjailemaan tästä eteenpäin osissa. Repo korruptoitunut oman pilven backupista. Siirretty projekti pois synkronoitavista tiedostoista

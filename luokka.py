@@ -22,7 +22,7 @@ class ReseptiKirja:
         self.lista = []
         self.tiedostonNimi = self.nimi + ".pkl"
         self.tiedosto = os.path.join(os.path.dirname(__file__), self.tiedostonNimi)
-        self.LataaLista(self.tiedosto, self.tiedostonNimi)
+        self.LataaLista(self.tiedosto)
 
     def TalletaLista(self, talletaTiedosto):
             avattuTiedosto = open(talletaTiedosto, "wb")

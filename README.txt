@@ -14,8 +14,6 @@ Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloitta
 
 Toimintoehdotukset:
 -Tulostettaessa kaikki reseptit, monisivu mahdollisuus?
--Reseptien muokkaus omaksi pääsivukseen?
--katso reseptiä sivuun useampi tarkastelu
 -Etsi reseptiä ominaisuus
 
 

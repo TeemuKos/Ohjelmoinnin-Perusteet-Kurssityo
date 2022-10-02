@@ -46,6 +46,7 @@ def TulostaNimi(lista):
 #Määritetään reseptikirja ja ruokalista ReseptiKirja olioiksi, ja ladataan tiedostot
 reseptiKirja = ReseptiKirja("reseptikirja")
 ruokaLista = ReseptiKirja("ruokalista")
+
 while True:
     print('\n'*40)
     print("Reseptikirjasi")
@@ -76,11 +77,11 @@ while True:
     elif a == 2: #Poista resepti
         ValmisteleSivu(a)
         TulostaNimi(reseptiKirja.lista)
-        print("Kaikki")
-        etsiPoisto = str(input("Valitse reseptin numero tai toiminto, jätä tyhjäksi palataksesi "))
-        toiminto = reseptiKirja.PoistaToiminto(etsiPoisto)
+        print("-Kaikki")
+        etsiPoistettava = str(input("Valitse reseptin numero tai toiminto, jätä tyhjäksi palataksesi "))
+        toiminto = reseptiKirja.PoistaToiminto(etsiPoistettava)
         varmistus = input("Oletko aivan varma (k) tai (e): ")
-        reseptiKirja.PoistaVarmistus(toiminto,etsiPoisto,varmistus)
+        reseptiKirja.PoistaVarmistus(toiminto,etsiPoistettava,varmistus)
         reseptiKirja.TalletaLista(reseptiKirja.tiedosto)
         Enter()
     elif a == 3: #Katso reseptiä
@@ -107,7 +108,7 @@ while True:
             TulostaNimi(reseptiKirja.lista)
             etsiIndeksi = input("Paina enter palataksesi, valitse reseptin numero muokataksesi: ")
             if etsiIndeksi.isnumeric():
-                etsiIndeksi = int(etsiIndeksi) -1
+                indeksi = int(etsiIndeksi) -1
                 print('\n'*40)
                 print("Mitä haluat muokata?")
                 print("1- Nimi")
@@ -115,16 +116,17 @@ while True:
                 print("3- Valmistusohjetta")
                 etsi = (int(input("Valitse muokattavan asian numero: ")))
                 print('\n'*40)
+                reseptiKirjanOlio = reseptiKirja.lista[indeksi]
                 if etsi == 1:
-                    print("Ruoan vanha nimi oli: " ,reseptiKirja.lista[etsiIndeksi].nimi)
+                    print("Ruoan vanha nimi oli: " ,reseptiKirjanOlio.nimi)
                     print()
-                    reseptiKirja.MuokkaaListanOlioNimi(etsiIndeksi, input("Anna uusi nimi: "))
+                    reseptiKirja.MuokkaaListanOlioNimi(indeksi, input("Anna uusi nimi: "))
                 elif etsi == 2:
-                    print("Ruoan vanhat raaka-aineet olivat: ", reseptiKirja.lista[etsiIndeksi].raakaAineet)
-                    reseptiKirja.MuokkaaListanOlioAine(etsiIndeksi, MoniRivi())
+                    print("Ruoan vanhat raaka-aineet olivat: ", reseptiKirjanOlio.raakaAineet)
+                    reseptiKirja.MuokkaaListanOlioAine(indeksi, MoniRivi())
                 elif etsi == 3:
-                    print("Ruoan vanha valmistusohje oli: ", reseptiKirja.lista[etsiIndeksi].ohje)
-                    reseptiKirja.MuokkaaListanOlioOhje(etsiIndeksi, MoniRivi())
+                    print("Ruoan vanha valmistusohje oli: ", reseptiKirjanOlio.ohje)
+                    reseptiKirja.MuokkaaListanOlioOhje(indeksi, MoniRivi())
                 reseptiKirja.TalletaLista(reseptiKirja.tiedosto)
                 Enter()
         else:

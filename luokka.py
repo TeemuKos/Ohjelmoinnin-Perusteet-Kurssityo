@@ -75,7 +75,7 @@ class ReseptiKirja:
         print('\n'*40)
         self.lista[olionIndeksi].MuokkaaOhje(uusiOhje)
         print("Ruoan uusi valmistusohje on: ", self.lista[olionIndeksi].ohje)
-
+    
     def TulostaResepti(self,etsittyResepti):
         haettuResepti= int(etsittyResepti) - 1
         print('\n'*40)

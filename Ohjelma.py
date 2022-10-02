@@ -31,6 +31,8 @@ def MoniRivi():
         elif arvo == "" and sana == "":
             print("Yksi rivi vaaditaan!")
             continue
+        elif arvo != "" and sana == "":
+            sana += '\n' + "-" +arvo.capitalize()
         else:
             sana += '\n' + "-" +arvo
     print('\n'*40)

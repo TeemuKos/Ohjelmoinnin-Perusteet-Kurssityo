@@ -122,15 +122,26 @@ while True:
         ruokaLista.TalletaLista(ruokaLista.tiedosto)
         TulostaNimi(ruokaLista.lista)
         Enter()
-    elif a == 5: #Viimeisin ruokalista                                                              #LUO OMINAISUUS TULOSTAA RESEPTI
-        ValmisteleSivu(a)                                                                           #MINKÄ JÄLKEEN PALATA TAKAISIN LISTAAN
-        if ruokaLista.lista:
-            print("Viimeisin ruokalistasi:")
-            TulostaNimi(ruokaLista.lista)
-        else:
-            print("Ruokalistaa ei ole tehty!")
-            print()
-        Enter()
+    elif a == 5: #Viimeisin ruokalista 
+        while True:                                                             #LUO OMINAISUUS TULOSTAA RESEPTI
+            ValmisteleSivu(a)                                                                           #MINKÄ JÄLKEEN PALATA TAKAISIN LISTAAN
+            if ruokaLista.lista:
+                print("Viimeisin ruokalistasi:")
+                TulostaNimi(ruokaLista.lista)
+                katsele = input("Halutessasi lukea reseptin, valitse sen numero, muutoin paina enter tyhjällä rivillä jatkaaksesi: ")
+                if katsele.isnumeric():
+                    ruokaLista.TulostaResepti(katsele)
+                else:
+                    continue
+                poistu = input("Haluatko katsoa toista reseptiä? [K tai E] ")
+                if poistu == "k":
+                    continue
+                else:
+                    break
+            else:
+                print("Ruokalistaa ei ole tehty!")
+                print()
+                Enter()
     elif a == 6:
         break
     

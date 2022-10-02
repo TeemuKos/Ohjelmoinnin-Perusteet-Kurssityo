@@ -30,7 +30,7 @@ class ReseptiKirja:
             avattuTiedosto.close()
 
 
-    def LataaLista(self, lataaTiedosto, tiedosto):
+    def LataaLista(self, lataaTiedosto):
         try:
             avattuTiedosto = open(lataaTiedosto, "rb")
             self.lista = pickle.load(avattuTiedosto)
@@ -109,7 +109,7 @@ class ReseptiKirja:
             print("Olet poistamassa kaikki reseptit")
         return listaIndeksi
     
-    def PoistaVarmistus(self, indeksi, valinta,poistoVarmistus):                                       #EI POISTA KAIKKIA!!!!
+    def PoistaVarmistus(self, indeksi, valinta,poistoVarmistus):                                       
         print('\n'*40)
         if poistoVarmistus == "k" and valinta.isnumeric():
             print("Poistit reseptin: ",self.lista[indeksi].nimi, " reseptikirjasta")

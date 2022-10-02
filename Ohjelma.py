@@ -18,12 +18,15 @@ def Enter():
     print()
     input("Paina enter jatkaaksesi")
 
-def MoniRivi():                                                                                 #Toimintaehdotus: Varmista, että edes yhdellä rivillä arvo!
+def MoniRivi():                                                                                 
     sana = ""
     while True:
         arvo = input()
-        if arvo == "":                  
+        if arvo == "" and sana != "":                  
             break
+        elif arvo == "" and sana == "":
+            print("Yksi rivi vaaditaan!")
+            continue
         else:
             sana += '\n' + "-" +arvo
     print('\n'*40)

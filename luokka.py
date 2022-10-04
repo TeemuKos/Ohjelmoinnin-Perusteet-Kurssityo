@@ -14,7 +14,7 @@ class ruoka:
         self.ohje = muokattuOhje
         
     def __str__(self,):
-        return f"Ruoan nimi: {self.nimi}, Tarvittavat raaka-aineet: {self.raakaAineet}, Valmistusohje: {self.ohje}"
+        return f"Ruoan nimi: \n{self.nimi}\n \nTarvittavat raaka-aineet: {self.raakaAineet}\n \nValmistusohje: {self.ohje} \n"
 
 class ReseptiKirja:
     def __init__(self,nimi):
@@ -22,7 +22,7 @@ class ReseptiKirja:
         self.lista = []
         self.tiedostonNimi = self.nimi + ".pkl"
         self.tiedosto = os.path.join(os.path.dirname(__file__), self.tiedostonNimi)
-        self.LataaLista(self.tiedosto, self.tiedostonNimi)
+        self.LataaLista(self.tiedosto)
 
     def TalletaLista(self, talletaTiedosto):
             avattuTiedosto = open(talletaTiedosto, "wb")
@@ -30,7 +30,7 @@ class ReseptiKirja:
             avattuTiedosto.close()
 
 
-    def LataaLista(self, lataaTiedosto, tiedosto):
+    def LataaLista(self, lataaTiedosto):
         try:
             avattuTiedosto = open(lataaTiedosto, "rb")
             self.lista = pickle.load(avattuTiedosto)
@@ -61,6 +61,7 @@ class ReseptiKirja:
                 print("Reseptikirjassasi ei ole riittävän monta ruokaa!")
         else:
             return    
+        
     def MuokkaaListanOlioNimi(self, olionIndeksi,uusiNimi):
         print('\n'*40)
         self.lista[olionIndeksi].MuokkaaNimi(uusiNimi)
@@ -75,17 +76,13 @@ class ReseptiKirja:
         print('\n'*40)
         self.lista[olionIndeksi].MuokkaaOhje(uusiOhje)
         print("Ruoan uusi valmistusohje on: ", self.lista[olionIndeksi].ohje)
-
+    
     def TulostaResepti(self,etsittyResepti):
         haettuResepti= int(etsittyResepti) - 1
         print('\n'*40)
-        print("Ruoan nimi: ",self.lista[haettuResepti].nimi)
-        print()
-        print("Tarvittavat raaka-aineet",self.lista[haettuResepti].raakaAineet)
-        print()
-        print("Valmistusohje: ",self.lista[haettuResepti].ohje)
-        print()
-        return haettuResepti        
+        print(self.lista[haettuResepti])
+        return haettuResepti  
+      
     def ViimeisinRuokalista(self):
         if self.lista == True:
             print("Viimeisin ruokalistasi")
@@ -109,7 +106,7 @@ class ReseptiKirja:
             print("Olet poistamassa kaikki reseptit")
         return listaIndeksi
     
-    def PoistaVarmistus(self, indeksi, valinta,poistoVarmistus):                                       #EI POISTA KAIKKIA!!!!
+    def PoistaVarmistus(self, indeksi, valinta,poistoVarmistus):                                       
         print('\n'*40)
         if poistoVarmistus == "k" and valinta.isnumeric():
             print("Poistit reseptin: ",self.lista[indeksi].nimi, " reseptikirjasta")

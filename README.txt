@@ -13,8 +13,15 @@ Ohjelman tarkoituksena on toimia sähköisenä reseptikirjana, jolla on seuraava
 Repo korruptoitunut jostain syystä kertaalleen. Tämän vuoksi jouduttu aloittamaan uusi repo ja pushattu koko roska yhtenä kappaleena. Pyritään korjailemaan tästä eteenpäin osissa. Repo korruptoitunut oman pilven backupista. Siirretty projekti pois synkronoitavista tiedostoista
 
 Toimintoehdotukset:
-- Varmista, että monirivi() vaatii ainakin yhden rivin parametrikseen
-- Luo ominaisuus tulostaa resepti, minkä jälkeen palataan takaisin listaan
+-Tulostettaessa kaikki reseptit, monisivu mahdollisuus?
+-Etsi reseptiä ominaisuus
 
+
+Korjaukset:
+-Vakioi metodejen ja funktioiden nimitykset
+-Vakioi metodejen ja funktioiden parametrien järjestykset
+-Tarkasta, saisiko koodia vielä siistittyä
+-Korjaa printtien suomenkieli
+-Tee reseptikirja eri kansioon kokonaisempaa testailua varten
 
 Bugit:

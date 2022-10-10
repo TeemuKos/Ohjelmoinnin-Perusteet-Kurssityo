@@ -95,16 +95,14 @@ class ReseptiKirja:
 
     def PoistaToiminto(self,valinta):
         print('\n'*40)
-        listaIndeksi = 0
         if valinta.isnumeric():
-            listaIndeksi = int(valinta) - 1
+            valinta = int(valinta)
             print()
-            print("Olet poistamassa reseptiä: ", self.lista[listaIndeksi].nimi)
-
+            print("Olet poistamassa reseptiä: ", self.lista[valinta-1].nimi)
         elif valinta.lower() == "kaikki":
             print()
             print("Olet poistamassa kaikki reseptit")
-        return listaIndeksi
+        return valinta -1
     
     def PoistaVarmistus(self, indeksi, valinta,poistoVarmistus):                                       
         print('\n'*40)

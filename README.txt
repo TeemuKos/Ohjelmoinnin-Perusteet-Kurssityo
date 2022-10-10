@@ -12,3 +12,5 @@ Ohjelman tarkoituksena on toimia sähköisenä reseptikirjana, jolla on seuraava
 - Kaikki reseptikirjan ja ruokalistojen objektit ovat olioita
 - olioilla on metodeja, joita kutsutaan käyttäjän määrittämän toiminnallisuuden myötä
 - Koodissa funktioita, jotka lyhentävät koodia toistojen osalta
+
+https://github.com/Teemu-Kostamo/Ohjelmoinnin-Perusteet-Kurssityo

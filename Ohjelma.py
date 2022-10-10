@@ -40,7 +40,7 @@ def MoniRivi():
 
 def TulostaNimi(lista):
     for x in range(len(lista)):
-        print(x+1,"-" + lista[x].nimi)
+        print("[",x+1,"] " + lista[x].nimi)
 
 #PÄÄKOODI
 #Määritetään reseptikirja ja ruokalista ReseptiKirja olioiksi, ja ladataan tiedostot
@@ -79,13 +79,14 @@ while True:
     elif a == 2: #Poista resepti
         ValmisteleSivu(a)
         TulostaNimi(reseptiKirja.lista)
-        print("-Kaikki")
+        print("[Kaikki]")
         etsiPoistettava = input("Valitse reseptin numero tai toiminto, jätä tyhjäksi palataksesi ")
-        toiminto = reseptiKirja.PoistaToiminto(etsiPoistettava)
-        varmistus = input("Oletko aivan varma (k) tai (e): ")
-        reseptiKirja.PoistaVarmistus(toiminto,etsiPoistettava,varmistus)
-        reseptiKirja.TalletaLista(reseptiKirja.tiedosto)
-        Enter()
+        if etsiPoistettava != "":
+            toiminto = reseptiKirja.PoistaToiminto(etsiPoistettava)
+            varmistus = input("Oletko aivan varma (k) tai (e): ")
+            reseptiKirja.PoistaVarmistus(toiminto,etsiPoistettava,varmistus)
+            reseptiKirja.TalletaLista(reseptiKirja.tiedosto)
+            Enter()
     elif a == 3: #Katso reseptiä
         while True:
             ValmisteleSivu(a)

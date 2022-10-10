@@ -9,6 +9,6 @@ Ohjelman tarkoituksena on toimia sähköisenä reseptikirjana, jolla on seuraava
 -Tallentaa listat tiedostoihin .pkl
 -Lataa listat tiedostoista .pkl
 
-Kaikki reseptikirjan ja ruokalistojen objektit ovat olioita
-olioilla on metodeja, joita kutsutaan käyttäjän määrittämän toiminnallisuuden myötä
-Koodissa funktioita, jotka lyhentävät koodia toistojen osalta
+- Kaikki reseptikirjan ja ruokalistojen objektit ovat olioita
+- olioilla on metodeja, joita kutsutaan käyttäjän määrittämän toiminnallisuuden myötä
+- Koodissa funktioita, jotka lyhentävät koodia toistojen osalta

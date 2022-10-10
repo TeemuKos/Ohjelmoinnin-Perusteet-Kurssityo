@@ -71,7 +71,9 @@ while True:
             continue
         else:
             print('\n'*40)
+            print("Raaka-aineet")
             luotuRaakaAine = MoniRivi()
+            print("Valmistusohje")
             luotuOhje = MoniRivi()
             reseptiKirja.LuoUusiRuoka(luotunimi,luotuRaakaAine,luotuOhje)
             reseptiKirja.TalletaLista(reseptiKirja.tiedosto)
@@ -104,6 +106,7 @@ while True:
             else:
                 print("Reseptikirjassasi ei ole vielä yhtään reseptiä!")
                 Enter()
+                break
     elif a == 4: #Muokkaa reseptiä
         ValmisteleSivu(a)
         if reseptiKirja.lista:
@@ -138,10 +141,12 @@ while True:
         ValmisteleSivu(a)
         print("Reseptikirjassasi on ",len(reseptiKirja.lista), " ruokaa")
         ruokienMaara= input("Montako ruokaa haluaisit listaasi? Jätä tyhjäksi palataksesi: ")
-        ruokaLista.LuoRuokaLista(reseptiKirja.lista, ruokienMaara)
-        ruokaLista.TalletaLista(ruokaLista.tiedosto)
-        TulostaNimi(ruokaLista.lista)
-        Enter()
+        if ruokienMaara != "":
+            ruokaLista.LuoRuokaLista(reseptiKirja.lista, ruokienMaara)
+            ruokaLista.TalletaLista(ruokaLista.tiedosto)
+            TulostaNimi(ruokaLista.lista)
+            Enter()
+
     elif a == 6: #Viimeisin ruokalista 
         while True:                                                             
             ValmisteleSivu(a)                                                                           
@@ -152,7 +157,7 @@ while True:
                 if katsele.isnumeric():
                     ruokaLista.TulostaResepti(katsele)
                 else:
-                    continue
+                    break
                 poistu = input("Haluatko katsoa toista reseptiä? [K tai E]: ")
                 if poistu == "k":
                     continue
@@ -162,5 +167,6 @@ while True:
                 print("Ruokalistaa ei ole tehty!")
                 print()
                 Enter()
+                break
     elif a == 7:
         break
